@@ -110,6 +110,39 @@ export default function ContactForm() {
         )}
       </div>
 
+      {/* Subject */}
+      <div>
+        <label
+          htmlFor="subject"
+          style={{
+            display: 'block',
+            fontFamily: 'var(--font-body)',
+            fontWeight: 600,
+            fontSize: '0.9rem',
+            color: 'var(--color-ipc-charcoal)',
+            marginBottom: '0.5rem',
+          }}
+        >
+          Subject <span aria-hidden="true" style={{ color: '#dc2626' }}>*</span>
+        </label>
+        <input
+          id="subject"
+          name="subject"
+          type="text"
+          className="form-input"
+          placeholder="e.g. Volunteer Enquiry"
+          required
+          aria-required="true"
+          aria-describedby={state.errors?.subject ? 'subject-error' : undefined}
+          aria-invalid={!!state.errors?.subject}
+        />
+        {state.errors?.subject && (
+          <p id="subject-error" role="alert" style={{ color: '#dc2626', fontSize: '0.8rem', marginTop: '0.375rem' }}>
+            {state.errors.subject[0]}
+          </p>
+        )}
+      </div>
+
       {/* Message */}
       <div>
         <label

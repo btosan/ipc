@@ -8,6 +8,7 @@ export type ContactFormState = {
   errors?: {
     name?: string[]
     email?: string[]
+    subject?: string[]
     message?: string[]
   }
 }
@@ -18,9 +19,9 @@ export async function submitContactForm(
 ): Promise<ContactFormState> {
   const name = formData.get('name')?.toString().trim() ?? ''
   const email = formData.get('email')?.toString().trim() ?? ''
+  const subject = formData.get('subject')?.toString().trim() ?? ''
   const message = formData.get('message')?.toString().trim() ?? ''
 
-  // Validation
   const errors: ContactFormState['errors'] = {}
 
   if (!name || name.length < 2) {
@@ -29,6 +30,10 @@ export async function submitContactForm(
 
   if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
     errors.email = ['Please provide a valid email address.']
+  }
+
+  if (!subject || subject.length < 2) {
+    errors.subject = ['Please provide a subject.']
   }
 
   if (!message || message.length < 10) {
@@ -40,8 +45,8 @@ export async function submitContactForm(
   }
 
   try {
-    await prisma.contactSubmission.create({
-      data: { name, email, message },
+    await prisma.contactMessage.create({
+      data: { name, email, subject, message },
     })
 
     return {
