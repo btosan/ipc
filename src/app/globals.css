@@ -1,0 +1,229 @@
+@import "tailwindcss";
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+@theme {
+  /* ── Brand colours ─────────────────────────────────────────── */
+  --color-ipc-green:        #16a34a;
+  --color-ipc-green-dark:   #166534;
+  --color-ipc-green-light:  #22c55e;
+  --color-ipc-gold:         #d97706;
+  --color-ipc-gold-light:   #fbbf24;
+  --color-ipc-cream:        #fefce8;
+  --color-ipc-charcoal:     #1c1917;
+  --color-ipc-stone:        #78716c;
+
+  /* ── Typography ────────────────────────────────────────────── */
+  --font-display:  'Playfair Display', Georgia, serif;
+  --font-body:     'DM Sans', system-ui, sans-serif;
+  --font-mono:     'JetBrains Mono', monospace;
+
+  /* ── Spacing / sizing ──────────────────────────────────────── */
+  --radius-card:  1rem;
+  --radius-btn:   0.5rem;
+
+  /* ── Shadows ───────────────────────────────────────────────── */
+  --shadow-card:  0 4px 32px 0 rgb(22 163 74 / 0.10);
+  --shadow-hero:  0 8px 64px 0 rgb(22 163 74 / 0.18);
+}
+
+/* ── Base resets ───────────────────────────────────────────────── */
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  -webkit-font-smoothing: antialiased;
+}
+
+body {
+  font-family: var(--font-body);
+  background-color: #fff;
+  color: var(--color-ipc-charcoal);
+}
+
+/* ── Custom utility classes ────────────────────────────────────── */
+.font-display {
+  font-family: var(--font-display);
+}
+
+.text-gradient-green {
+  background: linear-gradient(135deg, var(--color-ipc-green) 0%, var(--color-ipc-green-light) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.text-gradient-gold {
+  background: linear-gradient(135deg, var(--color-ipc-gold) 0%, var(--color-ipc-gold-light) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.bg-pattern-dots {
+  background-image: radial-gradient(circle, var(--color-ipc-green) 1px, transparent 1px);
+  background-size: 24px 24px;
+}
+
+.bg-mesh-green {
+  background:
+    radial-gradient(ellipse at 20% 50%, rgb(22 163 74 / 0.12) 0%, transparent 60%),
+    radial-gradient(ellipse at 80% 20%, rgb(217 119 6 / 0.08) 0%, transparent 50%),
+    radial-gradient(ellipse at 60% 80%, rgb(22 163 74 / 0.08) 0%, transparent 50%),
+    #fff;
+}
+
+/* ── Animation utilities ──────────────────────────────────────── */
+@keyframes fade-up {
+  from { opacity: 0; transform: translateY(24px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fade-in {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+@keyframes count-up {
+  from { opacity: 0; transform: scale(0.8); }
+  to   { opacity: 1; transform: scale(1); }
+}
+
+@keyframes pulse-ring {
+  0%   { transform: scale(1); opacity: 0.6; }
+  100% { transform: scale(1.5); opacity: 0; }
+}
+
+.animate-fade-up {
+  animation: fade-up 0.7s ease both;
+}
+
+.animate-fade-in {
+  animation: fade-in 0.6s ease both;
+}
+
+.animate-count-up {
+  animation: count-up 0.8s cubic-bezier(0.34, 1.56, 0.64, 1) both;
+}
+
+.delay-100 { animation-delay: 0.1s; }
+.delay-200 { animation-delay: 0.2s; }
+.delay-300 { animation-delay: 0.3s; }
+.delay-400 { animation-delay: 0.4s; }
+.delay-500 { animation-delay: 0.5s; }
+.delay-600 { animation-delay: 0.6s; }
+
+/* ── Section spacing ──────────────────────────────────────────── */
+.section-pad {
+  padding-top: 5rem;
+  padding-bottom: 5rem;
+}
+
+@media (min-width: 768px) {
+  .section-pad {
+    padding-top: 7rem;
+    padding-bottom: 7rem;
+  }
+}
+
+/* ── Card ──────────────────────────────────────────────────────── */
+.card {
+  background: #fff;
+  border-radius: var(--radius-card);
+  box-shadow: var(--shadow-card);
+  border: 1px solid rgb(22 163 74 / 0.08);
+  transition: box-shadow 0.3s ease, transform 0.3s ease;
+}
+
+.card:hover {
+  box-shadow: 0 8px 48px 0 rgb(22 163 74 / 0.16);
+  transform: translateY(-2px);
+}
+
+/* ── Buttons ───────────────────────────────────────────────────── */
+.btn-primary {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.75rem 1.75rem;
+  background: var(--color-ipc-green);
+  color: #fff;
+  font-family: var(--font-body);
+  font-weight: 600;
+  font-size: 0.95rem;
+  border-radius: var(--radius-btn);
+  transition: background 0.2s ease, transform 0.15s ease, box-shadow 0.2s ease;
+  text-decoration: none;
+}
+
+.btn-primary:hover {
+  background: var(--color-ipc-green-dark);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 16px rgb(22 163 74 / 0.3);
+}
+
+.btn-gold {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.75rem 1.75rem;
+  background: var(--color-ipc-gold);
+  color: #fff;
+  font-family: var(--font-body);
+  font-weight: 600;
+  font-size: 0.95rem;
+  border-radius: var(--radius-btn);
+  transition: background 0.2s ease, transform 0.15s ease;
+  text-decoration: none;
+}
+
+.btn-gold:hover {
+  background: #b45309;
+  transform: translateY(-1px);
+}
+
+.btn-outline {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.75rem 1.75rem;
+  background: transparent;
+  color: var(--color-ipc-green);
+  font-family: var(--font-body);
+  font-weight: 600;
+  font-size: 0.95rem;
+  border-radius: var(--radius-btn);
+  border: 2px solid var(--color-ipc-green);
+  transition: all 0.2s ease;
+  text-decoration: none;
+}
+
+.btn-outline:hover {
+  background: var(--color-ipc-green);
+  color: #fff;
+}
+
+/* ── Form inputs ───────────────────────────────────────────────── */
+.form-input {
+  width: 100%;
+  padding: 0.75rem 1rem;
+  border: 1.5px solid #e5e7eb;
+  border-radius: 0.5rem;
+  font-family: var(--font-body);
+  font-size: 0.95rem;
+  color: var(--color-ipc-charcoal);
+  background: #fff;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+  outline: none;
+}
+
+.form-input:focus {
+  border-color: var(--color-ipc-green);
+  box-shadow: 0 0 0 3px rgb(22 163 74 / 0.12);
+}
+
+.form-input::placeholder {
+  color: #9ca3af;
+}
